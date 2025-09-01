@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProfileCard from '../components/ProfileCard'
 import Navbar from '../components/Navbar'
+import Button from '../components/Button'
 
 const captain = {
   name: 'Captain Alex',
@@ -13,46 +14,40 @@ const captain = {
 export default function Profile() {
   const navigate = useNavigate()
   const [isEditOpen, setEditOpen] = useState(false)
+  const [isModalVisible, setModalVisible] = useState(false)
+
+  useEffect(() => {
+    if (isEditOpen) {
+      const id = setTimeout(() => setModalVisible(true), 10)
+      return () => clearTimeout(id)
+    }
+    setModalVisible(false)
+  }, [isEditOpen])
 
   const logout = () => {
     navigate('/login')
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-20">
       <header className="p-4">
-        <h2 className="font-bold text-lg">Profile</h2>
+        <h2 className="font-bold text-2xl">Profile</h2>
       </header>
 
-      <main className="px-4 space-y-4">
+      <main className="px-4 space-y-4 max-w-screen-sm mx-auto">
         <ProfileCard {...captain} />
 
-        <div className="flex gap-3">
-          <button
-            onClick={() => setEditOpen(true)}
-            className="flex-1 bg-primary hover:bg-blue-700 text-white font-bold py-3 rounded-2xl shadow-md transition-colors"
-          >
-            Edit Profile
-          </button>
-          <button
-            onClick={logout}
-            className="flex-1 bg-gray-900 hover:bg-black text-white font-bold py-3 rounded-2xl shadow-md transition-colors"
-          >
-            Logout
-          </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Button onClick={() => setEditOpen(true)} variant="primary">Edit Profile</Button>
+          <Button onClick={logout} variant="danger">Logout</Button>
         </div>
 
         {isEditOpen && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl shadow-xl p-4 w-full max-w-sm">
+          <div className={`fixed inset-0 flex items-center justify-center p-4 transition-opacity duration-300 ${isModalVisible ? 'bg-black/40 opacity-100' : 'bg-black/0 opacity-0'}`}>
+            <div className={`bg-white rounded-2xl shadow-xl p-4 w-full max-w-sm transform transition-all duration-300 ${isModalVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1'}`}>
               <h3 className="text-lg font-bold mb-2">Edit Profile</h3>
               <p className="text-sm text-gray-600 mb-4">This is a placeholder modal.</p>
-              <button
-                onClick={() => setEditOpen(false)}
-                className="w-full bg-secondary hover:bg-amber-600 text-white font-bold py-3 rounded-2xl shadow-md transition-colors"
-              >
-                Close
-              </button>
+              <Button onClick={() => setEditOpen(false)} variant="secondary">Close</Button>
             </div>
           </div>
         )}
