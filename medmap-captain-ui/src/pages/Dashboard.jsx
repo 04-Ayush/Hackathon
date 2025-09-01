@@ -12,17 +12,22 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-20">
+      {/* Header */}
       <header className="p-4 flex items-center gap-2">
         <div className="relative group">
           <Link to="/profile" className="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-700">
             <HiUserCircle className="w-7 h-7" />
           </Link>
-          <div className="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">Profile</div>
+          <div className="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+            Profile
+          </div>
         </div>
         <h2 className="font-bold text-xl">New Request</h2>
       </header>
 
+      {/* Main Content */}
       <main className="px-4 space-y-4 max-w-screen-sm mx-auto">
+        {/* Map Card */}
         <Card className="p-2" hover={false}>
           <Map
             center={pickup}
@@ -30,13 +35,14 @@ export default function Dashboard() {
           />
         </Card>
 
+        {/* Accept Request Button */}
         <Button onClick={() => navigate('/user-details')} variant="secondary">
           Accept Request
         </Button>
       </main>
 
+      {/* Navbar */}
       <Navbar />
     </div>
   )
 }
-

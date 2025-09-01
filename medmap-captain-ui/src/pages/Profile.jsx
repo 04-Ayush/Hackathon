@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProfileCard from '../components/ProfileCard'
 import Navbar from '../components/Navbar'
@@ -20,13 +20,12 @@ export default function Profile() {
     if (isEditOpen) {
       const id = setTimeout(() => setModalVisible(true), 10)
       return () => clearTimeout(id)
+    } else {
+      setModalVisible(false)
     }
-    setModalVisible(false)
   }, [isEditOpen])
 
-  const logout = () => {
-    navigate('/login')
-  }
+  const logout = () => navigate('/login')
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-20">
@@ -46,7 +45,7 @@ export default function Profile() {
           <div className={`fixed inset-0 flex items-center justify-center p-4 transition-opacity duration-300 ${isModalVisible ? 'bg-black/40 opacity-100' : 'bg-black/0 opacity-0'}`}>
             <div className={`bg-white rounded-2xl shadow-xl p-4 w-full max-w-sm transform transition-all duration-300 ${isModalVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1'}`}>
               <h3 className="text-lg font-bold mb-2">Edit Profile</h3>
-              <p className="text-sm text-gray-600 mb-4">This is a placeholder modal.</p>
+              <p className="text-sm text-gray-600 mb-4">This is a placeholder modal for editing your profile.</p>
               <Button onClick={() => setEditOpen(false)} variant="secondary">Close</Button>
             </div>
           </div>
@@ -57,4 +56,3 @@ export default function Profile() {
     </div>
   )
 }
-

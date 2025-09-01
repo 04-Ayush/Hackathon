@@ -32,8 +32,8 @@ export default function UserDetails() {
           />
         </Card>
 
-        <Card className="p-4 m-2">
-          <h3 className="text-lg font-bold mb-3">Passenger</h3>
+        <Card className="p-4">
+          <h3 className="text-lg font-bold mb-3">Passenger Info</h3>
           <div className="space-y-2 text-gray-700">
             <div className="flex items-center gap-2">
               <HiUser className="w-5 h-5 text-blue-600" />
@@ -50,11 +50,12 @@ export default function UserDetails() {
           </div>
         </Card>
 
-        <Button onClick={() => navigate('/hospital')} variant="primary">Confirm Pickup</Button>
+        <Button onClick={() => navigate('/hospital')} variant="primary">
+          Confirm Pickup
+        </Button>
       </main>
 
       <Navbar />
     </div>
   )
 }
-

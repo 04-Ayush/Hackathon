@@ -15,6 +15,7 @@ const hospitalInfo = {
 export default function Hospital() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-20">
+      {/* Header */}
       <header className="p-4 flex items-center gap-2">
         <Link to="/profile" className="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-700">
           <HiOfficeBuilding className="w-6 h-6" />
@@ -22,7 +23,9 @@ export default function Hospital() {
         <h2 className="font-bold text-xl">Hospital Destination</h2>
       </header>
 
+      {/* Main Content */}
       <main className="px-4 space-y-4 max-w-screen-sm mx-auto">
+        {/* Map Card */}
         <Card className="p-2" hover={false}>
           <Map
             center={pickup}
@@ -33,7 +36,8 @@ export default function Hospital() {
           />
         </Card>
 
-        <Card className="p-4 m-2">
+        {/* Hospital Info Card */}
+        <Card className="p-4">
           <h3 className="text-lg font-bold mb-3">Hospital</h3>
           <div className="space-y-2 text-gray-700">
             <div className="flex items-center gap-2">
@@ -52,4 +56,3 @@ export default function Hospital() {
     </div>
   )
 }
-
